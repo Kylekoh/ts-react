@@ -6,7 +6,7 @@ const GuGuDan = () => {
 	const [second, setSecond] = useState(Math.ceil(Math.random() * 9));
 	const [value, setValue] = useState('');
 	const [result, setResult] = useState('');
-	const inputEl = useRef(null);
+	const inputEl = useRef<HTMLInputElement>(null);
 
 	const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -16,11 +16,15 @@ const GuGuDan = () => {
 			setFirst(Math.ceil(Math.random() * 9));
 			setSecond(Math.ceil(Math.random() * 9));
 			setValue('');
-			input.focus();
+			if (input) {
+				input.focus();
+			}
 		} else {
 			setResult('땡');
 			setValue('');
-			input.focus();
+			if (input) {
+				input.focus();
+			}
 		}
 	};
 
@@ -37,6 +41,7 @@ const GuGuDan = () => {
 					onChange={(e) => setValue(e.target.value)}
 				/>
 			</form>
+			<div>{result}</div>
 		</>
 	);
 };

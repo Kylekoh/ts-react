@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { useMemo, FunctionComponent, Dispatch } from 'react';
+import { Dispatch, FunctionComponent, useMemo } from 'react';
 import Tr from './Tr';
+
 interface Props {
 	tableData: string[][];
 	dispatch: Dispatch<any>;
 	onClick: () => void;
 }
-
 const Table: FunctionComponent<Props> = ({ tableData, dispatch }) => {
 	return (
 		<table>

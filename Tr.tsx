@@ -1,55 +1,22 @@
-import {
-	Dispatch,
-	FunctionComponent,
-	useRef,
-	useEffect,
-	memo,
-	useMemo,
-} from 'react';
 import * as React from 'react';
+import { useContext, FC, memo } from 'react';
+import { TableContext } from './MineSearch';
 import Td from './Td';
 
 interface Props {
-	rowData: string[];
 	rowIndex: number;
-	dispatch: Dispatch<any>;
 }
-
-const Tr: FunctionComponent<Props> = ({ rowData, rowIndex, dispatch }) => {
-	console.log('tr rendered');
-
-	const ref = useRef<[string[]?, Dispatch<any>?, number?]>([]);
-	useEffect(() => {
-		console.log(
-			rowData === ref.current[0],
-			dispatch === ref.current[1],
-			rowIndex === ref.current[2]
-		);
-		ref.current = [rowData, dispatch, rowIndex];
-	}, [rowData, dispatch, rowIndex]);
+const Tr: FC<Props> = memo(({ rowIndex }) => {
+	const { tableData } = useContext(TableContext);
 
 	return (
 		<tr>
-			{Array(rowData.length)
-				.fill(null)
-				.map((td, i) =>
-					useMemo(
-						() => (
-							<Td
-								key={i}
-								dispatch={dispatch}
-								rowIndex={rowIndex}
-								cellIndex={i}
-								cellData={rowData[i]}
-							>
-								{''}
-							</Td>
-						),
-						[rowData[i]]
-					)
-				)}
+			{tableData[0] &&
+				Array(tableData[0].length)
+					.fill(null)
+					.map((td, i) => <Td key={i} rowIndex={rowIndex} cellIndex={i} />)}
 		</tr>
 	);
-};
+});
 
-export default memo(Tr);
+export default Tr;

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import NumberBaseball from './NumberBaseballClass';
 import RSP from './RSPClass';
 import Lotto from './LottoClass';
@@ -26,4 +24,4 @@ const GameMatcher = () => {
 	}
 };
 
-export default withRouter(GameMatcher);
+export default GameMatcher;
